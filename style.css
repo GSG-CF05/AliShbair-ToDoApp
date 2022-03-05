@@ -1,0 +1,83 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    display: flex;
+    justify-content: center;
+  }
+  
+  body {
+    padding: 1em;
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #d0f1eb;
+  }
+  
+  form {
+    margin-top: 2em;
+    width: 100%;
+    height: 10vh;
+  }
+  .inputTodo {
+    width: 70%;
+    height: 5vh;
+    border: none;
+    cursor: text;
+    margin-right: 10px;
+    border-radius: 1em;
+    padding: 10px;
+  }
+  .btnTodo {
+    width: 25%;
+    height: 4vh;
+    border-radius: 5px;
+    text-decoration: underline;
+    border: none;
+    background-color: #656f77;
+    color: #fff;
+  }
+  
+  ul.tasksList {
+    list-style: none;
+    width: 100%;
+    min-height: 30vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  ul.tasksList div {
+    width: 90%;
+    padding:  10px;
+    align-items: center;
+    height: 8vh;
+    display: flex;
+    justify-content: space-between;
+    filter: blur(0.5px);
+    font-size: larger;
+    background-color: darkcyan;
+    border-radius: 5px;
+  }
+  ul.tasksList div:hover {
+    filter: blur(0px);
+  }
+  
+  ul.tasksList div li.task {
+    width: 80%;
+    font-weight: bold;
+  }
+  
+  /* desktop */
+  
+  @media only screen and (min-width: 1124px) {
+    body {
+      width: 70%;
+    }
+  }
