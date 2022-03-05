@@ -4,7 +4,7 @@ let buttonTodo = document.querySelector(".btnTodo");
 let tasksList = document.querySelector(".tasksList");
 let buttonTodoEdit = document.querySelector(".btnTodoEdit");
 let tasks = []; // 72
-let ParentIndex = 0;
+let parentIndex = 0;
 let localData = localStorage.getItem("tasksKey");
 
 // add events
@@ -33,8 +33,6 @@ function addTask(e) {
   removeBtn.classList = "far fa-trash-alt delete";
   el.appendChild(removeBtn);
 
-  
-
   removeBtn.addEventListener("click", removeElement);
   function removeElement() {
     el.remove(); // just removed from screen not local yet.
@@ -59,10 +57,9 @@ function addTask(e) {
   function editElement(e) {
     if (e.target.classList.contains("edit")) {
       let taskText = e.target.parentNode.innerText;
-      let tasksKeyEdit = JSON.parse(localData);
-      ParentIndex = tasksKeyEdit.indexOf(taskText);
-      console.log(taskText);
-      inputTodo.value = tasksKeyEdit[ParentIndex];
+      let tasksKeyEdit = JSON.parse(localStorage.getItem("tasksKey"));
+      parentIndex = tasksKeyEdit.indexOf(taskText);
+      inputTodo.value = tasksKeyEdit[parentIndex];
       buttonTodoEdit.style.display = "block";
       buttonTodo.style.display = "none";
     }
@@ -79,10 +76,10 @@ function addTask(e) {
 
 
   inputTodo.value = "";
-  //end of else } all cases that have a real value.
 } // end of function addTasks
 
-//  ---------- On LOAD ---------- //
+
+//  On LOAD 
 
 // save on Load, get copy of data from local storage to page on reload.
 function getTasksOnLoad() {
@@ -123,34 +120,27 @@ function getTasksOnLoad() {
   let editBtn = document.createElement("i");
   editBtn.classList = "fas fa-pen edit";
   el.appendChild(editBtn);
+
+  el.addEventListener("click", editElement);
+  function editElement(e) {
+    if (e.target.classList.contains("edit")) {
+      let taskText = e.target.parentNode.innerText;
+      let tasksKeyEdit = JSON.parse(localStorage.getItem("tasksKey"));
+      parentIndex = tasksKeyEdit.indexOf(taskText);
+      inputTodo.value = tasksKeyEdit[parentIndex];
+      buttonTodoEdit.style.display = "block";
+      buttonTodo.style.display = "none";
+    }
+  } // end of Edit function
+
   
   }); //end of insider function} > end of forEach)
 } // end of function getTasksOnLoad
 
+// adding editing tasks to local storage.
+buttonTodoEdit.addEventListener('click', function(){
+    let tasksKeyEdit = JSON.parse(localStorage.getItem("tasksKey"));
+    tasksKeyEdit[parentIndex]=inputTodo.value;
+    localStorage.setItem("tasksKey", JSON.stringify(tasksKeyEdit));
+})
 
-
-
-
-
-
-
-
-
-// e.target.parentNode.classList.contains("task");
-//     tasks.forEach(task=>{
-//       let currentTask= document.getElementsByClassName("task")
-//       if(currentTask.textContent==task){
-//         currentTask.setAttribute("contenteditable", "true")
-//       }
-
-//     })
-
-// task.remove();
-// editBtn.textContent = "save";
-// editBtn.addEventListener("click", changeTask);
-//   function changeTask(){
-//     let newInput = document.createElement("input");
-//     el.appendChild(task);
-//     el.appendChild(newInput);
-
-//   }
